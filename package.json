@@ -1,0 +1,32 @@
+{
+  "name": "music-track",
+  "version": "1.0.0",
+  "description": "A tool to list your favourite songs with their genres.",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanmak/music-track.git"
+  },
+  "keywords": [
+    "music",
+    "genres"
+  ],
+  "dependencies": {
+    "async": "^2.2.0",
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "mongoose": "^4.9.2",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.2"
+  },
+  "author": "Sanket Makhija",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanmak/music-track/issues"
+  },
+  "homepage": "https://github.com/sanmak/music-track#readme"
+}

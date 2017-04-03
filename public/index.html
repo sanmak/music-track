@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="UTF-8">
+	<title>Playist</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>  
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.js"> </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  	<script src ="controller/controller.js"></script>
+</head>
+<body ng-app="myapp" ng-controller="musicController">
+<div class = "container-fluid">	
+ 	<div class = "row">
+ 		<div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+ 			<div class="panel panel-default">
+				<div class="panel-heading text-center">
+				<strong>Music Playlist</strong>
+				</div>
+			  	<div class="panel-body">
+			  		<div class="row">
+  					<div class="col-sm-8 col-sm-offset-2">
+    				<form role="form">
+            		<div class="input-group">
+              		<input type="text" class="form-control input-sm" placeholder="Search Title" ng-model = 'searchTitle'>
+              		<span class="input-group-btn">
+	                <button class="btn btn-default btn-sm" type="submit" ng-click = 'search()'>
+	                <span class="glyphicon glyphicon-search"></span>
+	                </button>
+              		</span>
+            		</div>
+    				</form>
+  				</div>
+			</div>
+			<hr>
+			  		<table class="table table-striped table-bordered table-hover table-condensed">
+			  			<thead>
+			  				<th>Title : <span class="label label-info text-uppercase"> CLICK ON TITLE OF SONG TO EDIT</span></th>
+			  				<th>Rating</th>
+			  			</thead>
+			  			<tbody>
+				  			<tr ng-repeat = "tracks in tracks">
+				  				<td href="#addTrackModal" data-toggle="modal" ng-click = "editTrack(tracks)">
+				  					{{tracks.displayName}}
+				  				</td>
+				  				<td>{{tracks.rating}}/10</td>
+				  			</tr>
+				  		</tbody>
+			  		</table>
+			  		<button class="btn btn-primary" ng-disabled = 'trackResponse.previous == null' ng-click = "fetchTrack(trackResponse.previous)">Prev</button>
+			  		<button class="btn btn-primary" ng-disabled = 'trackResponse.next == null' ng-click = "fetchTrack(trackResponse.next)">Next</button>
+			  		 <button class="btn btn-primary" type="submit" href="#addTrackModal" data-toggle="modal" ng-click = 'addNewTrackClicked()'> Add New Track
+	                </button>	
+			  		<hr>
+			  		<table class="table table-striped table-bordered table-hover table-condensed">
+			  			<thead>
+			  				<th>#</th>
+			  				<th>Genre <span class="label label-info text-uppercase"> CLICK ON GENRE TO EDIT</span></th>
+			  			</thead>
+			  			<tbody>
+				  			<tr ng-repeat = "genres in genres">
+				  				<td>{{$index+1}}</td>
+				  				<td href="#addGenreModal" data-toggle="modal" ng-click = "editGenre(genres)">
+				  					{{genres.name}}
+				  				</td>
+				  			</tr>
+				  		</tbody>
+			  		</table>
+	                <button class="btn btn-primary" type="submit" href="#addGenreModal" data-toggle="modal" ng-click = 'addNewGenreClicked()'> Add New Genre
+	                </button>
+			  	</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	  <div id="addTrackModal" class="modal fade pagination-centered">
+           <div class="modal-dialog result-width">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add New Track</h4>
+                </div>
+                 <div class="modal-body">
+                 	<table class="table table-striped table-bordered table-hover table-condensed">
+			  			<tbody>
+			  				<tr>
+			  					<td>
+			  						Title
+			  					</td>
+			  					<td>
+				  					<form>
+	  								<div class="form-group">
+	    							<input type="text" class="form-control" placeholder="Enter Music Title" ng-model = 'inputtedTrack'>
+	    							</div>
+    							</form>
+			  					</td>
+			  				</tr>
+			  				<tr>
+			  					<td>
+			  						Rating
+			  					</td>
+			  					<td>
+			  						<form class="form-inline">
+			  						<div class="form-group">
+			  					 	<input type="number" name="quantity" ng-model = 'inputtedRating' min="0" max="10"/>
+			  					 	</div>
+			  					 	</form>
+			  					</td>
+			  				</tr>
+			  				<tr>
+			  					<td>
+			  						Genres
+			  					</td>
+			  					<td>
+			  						<form class="form-inline">
+			  						<div class="form-group">
+			  						<label class="checkbox-inline" ng-repeat="genres in genres">
+								    <input type="checkbox" ng-model="genresSelected[genres.name]"> {{genres.name}} 
+									</label>
+									</div>
+									</form>	
+			  					</td>
+			  				</tr>
+			  			</tbody>
+			  		</table>
+                 </div>
+                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('track')" data-dismiss="modal">Save changes</button>
+                                 </div>
+            </div>
+            </div>
+		</div>
+		 <div id="addGenreModal" class="modal fade pagination-centered">
+           <div class="modal-dialog result-width">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Add New Genre</h4>
+                </div>
+                 <div class="modal-body">
+                 	<table class="table table-striped table-bordered table-hover table-condensed">
+			  			<tbody>
+			  				<tr>
+			  					<td>
+			  						Genre Name 
+			  					</td>
+			  					<td>
+				  					<form>
+	  								<div class="form-group">
+	    							<input type="text" class="form-control" placeholder="Enter Genre Name" ng-model = 'enterGenre'>
+	    							</div>
+    								</form>
+			  					</td>
+			  				</tr>
+			  			</tbody>
+			  		</table>
+                 </div>
+                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('genre')" data-dismiss="modal">Save changes</button>
+                                 </div>
+            </div>
+            </div>
+		</div>
+		<div id="confirmationModal" class="modal fade">
+                           <div class="modal-dialog">
+                              <div class="modal-content">
+                                 <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title">Confirmation</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                    <p>Do you want to save changes ?</p>
+                                 </div>
+                                 <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" ng-click = "save()" data-toggle="modal" data-target="#queryResultModal" data-dismiss="modal">Save changes</button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="queryResultModal" class="modal fade" data-backdrop="static" data-keyboard="false">
+                        <div class="modal-dialog result-width">
+                            <div class="modal-content">
+                                 <div class="modal-header">
+                                    <h4 class="modal-title">SUCCESS</h4>
+                                 </div>
+                                 <div class="modal-body">
+                                 	<p class="text-success text-center" ng-if="errorInOperation === false">
+                                             <strong>Your Changes Have Been Saved.
+                                             </strong>
+                                             <span class="glyphicon glyphicon-ok" aria-hidden="true">
+                                             </span>
+                                    </p>
+                                    <p class="text-warning text-center" ng-if="errorInOperation === true">
+                                             <strong>SOME ERROR OCCURED.
+                                             </strong>
+                                             <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                                             </span>
+                                    </p>
+                                 </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" ng-disabled = "queryDoneStatus" data-dismiss="modal" ng-click="fetchData()">DONE</button>
+                                 </div>
+                            </div> 
+                        </div>
+                        </div>
+	</div>
+</body>
+</html>
