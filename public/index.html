@@ -128,7 +128,7 @@
                  </div>
                  <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('track')" data-dismiss="modal">Save changes</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('track')" data-dismiss="modal" ng-disabled = "inputtedTrack.length <= 0">Save changes</button>
                                  </div>
             </div>
             </div>
@@ -160,7 +160,7 @@
                  </div>
                  <div class="modal-footer">
                                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('genre')" data-dismiss="modal">Save changes</button>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmationModal" ng-click = "genreOrTrack('genre')" data-dismiss="modal" ng-disabled = "enterGenre.length <= 0">Save changes</button>
                                  </div>
             </div>
             </div>
