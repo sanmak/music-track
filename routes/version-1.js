@@ -30,6 +30,7 @@ router.get('/genres', function(req, res) {
 			genres.find({},{'id':1,'name' :1,'_id' : 0})
 			.limit(singlePageObject)
 			.skip((page - 1) * singlePageObject)
+			.sort({'date' : -1})
 			.exec(function(err,execRes){
 				if(err){
 					res.send(err);
@@ -53,7 +54,7 @@ router.get('/genres/:gid', function(req, res) {
   });
 });
 router.get('/allgenres', function(req, res) {
-  genres.find({},{'id':1,'name' :1,'_id' : 0},function(err,findRes){
+  genres.find({},{'id':1,'name' :1,'_id' : 0},{sort : {'date' : -1}},function(err,findRes){
   	if(err){
   		res.send(err);
   	}
@@ -143,6 +144,7 @@ router.get('/tracks', function(req, res) {
 				tracks.find({},{'id' : 1,'title' : 1,'rating': 1,'genres' : 1,'_id' : 0})
 				.limit(singlePageObject)
 				.skip((page - 1) * singlePageObject)
+				.sort({'date' : -1})
 				.exec(function(err,execRes){
 					if(err){
 						res.send(err);
