@@ -1,30 +1,30 @@
 {
-  "name": "music-track",
-  "version": "1.0.0",
-  "description": "A tool to list your favourite songs with their genres.",
-  "scripts": {
-    "start": "node ./bin/www"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sanmak/music-track.git"
-  },
-  "keywords": [
-    "music",
-    "genres"
-  ],
-  "dependencies": {
-    "async": "^2.2.0",
-    "body-parser": "~1.16.0",
-    "debug": "~2.6.0",
-    "express": "~4.14.1",
-    "mongoose": "^5.8.7",
-    "morgan": "~1.7.0"
-  },
-  "author": "Sanket Makhija",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/sanmak/music-track/issues"
-  },
-  "homepage": "https://github.com/sanmak/music-track#readme"
+	"name": "music-track",
+	"version": "1.0.0",
+	"description": "A tool to list your favourite songs with their genres.",
+	"scripts": {
+		"start": "node ./bin/www"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sanmak/music-track.git"
+	},
+	"keywords": [
+		"music",
+		"genres"
+	],
+	"dependencies": {
+		"async": "^2.2.0",
+		"body-parser": "~1.16.0",
+		"debug": "~2.6.0",
+		"express": "~4.14.1",
+		"mongoose": "^5.8.7",
+		"morgan": "~1.7.0"
+	},
+	"author": "Sanket Makhija",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/sanmak/music-track/issues"
+	},
+	"homepage": "https://github.com/sanmak/music-track#readme"
 }
