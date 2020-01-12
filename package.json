@@ -18,7 +18,7 @@
     "body-parser": "~1.16.0",
     "debug": "~2.6.0",
     "express": "~4.14.1",
-    "mongoose": "^4.9.2",
+    "mongoose": "^5.8.7",
     "morgan": "~1.7.0"
   },
   "author": "Sanket Makhija",
